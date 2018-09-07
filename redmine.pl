@@ -12,7 +12,7 @@ use Time::Piece;
 use Time::Seconds;
 
 
-sub api_key { 
+sub api_key {
     open (FILE, 'api_key.txt') or die "$!";
     my @keys = <FILE>;
     chomp(@keys);
@@ -60,7 +60,7 @@ for my $user (keys %$issues) {
     next if !@$finish;
 
     print "- @" . $user . "\n";
-    print "    - " . "#[$_->{id}] : $_->{subject}\n" for @$finish;
+    print "    - " . "[#[$_->{id}](https://redmine.fout.jp/issues/$_->{id}) : $_->{subject}\n" for @$finish;
 }
 
 print "\nProgress\n\n";
@@ -70,6 +70,6 @@ for my $user (keys %$issues) {
     next if !@$progress;
 
     print "- @" . $user . "\n";
-    print "    - " . "#[$_->{id}] : $_->{subject}\n" for @$progress;
+    print "    - " . "#[$_->{id}](https://redmine.fout.jp/issues/$_->{id}) : $_->{subject}\n" for @$progress;
 }
 print "\n";
