@@ -46,7 +46,7 @@ for my $row (@{get_issues()}) {
 
 print "Finish\n\n";
 
-for my $user (keys %$issues) {
+for my $user (sort { $a cmp $b } keys %$issues) {
     my $finish = [ grep { $_->{status}->{name} =~ 'Finish' } @{$issues->{$user}} ];
     next if !@$finish;
 
@@ -56,7 +56,7 @@ for my $user (keys %$issues) {
 
 print "\nProgress\n\n";
 
-for my $user (keys %$issues) {
+for my $user (sort { $a cmp $b } keys %$issues) {
     my $progress = [ grep { $_->{status}->{name} =~ 'Progress' } @{$issues->{$user}} ];
     next if !@$progress;
 
