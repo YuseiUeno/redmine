@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use utf8;
+use feature qw/say/;
 
 use URI;
 use URI::QueryParam;
@@ -38,29 +39,12 @@ sub get_issues {
 }
 
 
-my $issues = {};
+my $issues = get_issues();
 
-for my $row (@{get_issues()}) {
-    push @{$issues->{$row->{assigned_to}->{name}}}, $row;
-}
+say "###### Finish\n";
+say "- " . "[#$_->{id}](https://redmine.fout.jp/issues/$_->{id}) : $_->{subject}" for grep { $_->{status}->{name} =~ 'Finish' } @$issues;
+print "\n";
 
-print "Finish\n\n";
-
-for my $user (sort { $a cmp $b } keys %$issues) {
-    my $finish = [ grep { $_->{status}->{name} =~ 'Finish' } @{$issues->{$user}} ];
-    next if !@$finish;
-
-    print "- @" . $user . "\n";
-    print "    - " . "[#$_->{id}](https://redmine.fout.jp/issues/$_->{id}) : $_->{subject}\n" for @$finish;
-}
-
-print "\nProgress\n\n";
-
-for my $user (sort { $a cmp $b } keys %$issues) {
-    my $progress = [ grep { $_->{status}->{name} =~ 'Progress' } @{$issues->{$user}} ];
-    next if !@$progress;
-
-    print "- @" . $user . "\n";
-    print "    - " . "[#$_->{id}](https://redmine.fout.jp/issues/$_->{id}) : $_->{subject}\n" for @$progress;
-}
+say "###### Progress\n";
+say "- " . "[#$_->{id}](https://redmine.fout.jp/issues/$_->{id}) : $_->{subject}" for grep { $_->{status}->{name} =~ 'Progress' } @$issues;
 print "\n";
