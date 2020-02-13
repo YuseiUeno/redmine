@@ -155,6 +155,14 @@ DISTRIBUTIONS
       Mozilla::CA 0
       Net::SSLeay 1.46
       Scalar::Util 0
+  JSON-4.02
+    pathname: I/IS/ISHIGAKI/JSON-4.02.tar.gz
+    provides:
+      JSON 4.02
+      JSON::Backend::PP 4.02
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
   LWP-MediaTypes-6.02
     pathname: G/GA/GAAS/LWP-MediaTypes-6.02.tar.gz
     provides:
