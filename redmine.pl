@@ -41,10 +41,10 @@ sub get_issues {
 
 my $issues = get_issues();
 
-say "###### Finish\n";
+say "#### Finish\n";
 say "- " . "[#$_->{id}](https://redmine.fout.jp/issues/$_->{id}) : $_->{subject}" for grep { $_->{status}->{name} =~ 'Finish' } @$issues;
 print "\n";
 
-say "###### Progress\n";
+say "#### Progress\n";
 say "- " . "[#$_->{id}](https://redmine.fout.jp/issues/$_->{id}) : $_->{subject}" for grep { $_->{status}->{name} =~ 'Progress' } @$issues;
 print "\n";
